@@ -70,12 +70,13 @@ class ZillowError(Exception):
     def __unicode__(self):
         return self.message
 
+    # __str__ should return a str, not a dict
     if sys.version_info[0] >= 3:  # Python 3
         def __str__(self):
-            return self.__unicode__()
+            return str(self.__unicode__())
     else:  # Python 2
         def __str__(self):
-            return self.__unicode__().encode('utf8')
+            return str(self.__unicode__().encode('utf8'))
 
 
 class ZillowFail(Exception):
